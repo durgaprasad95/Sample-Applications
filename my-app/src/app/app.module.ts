@@ -1,32 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 import { AppComponent } from './app.component';
-import { CrisisListComponent } from './hero/crisis-list.component';
-import { HeroListComponent } from './hero/hero-list.component';
-import { PageNotFoundComponent } from './hero/not-found.component';
-
-const appRoutes: Routes = [
-  { path: 'crisis-center', component: CrisisListComponent },
-  { path: 'heroes', component: HeroListComponent },
-  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
-];
+import { HeroesComponent } from './hero/heroes.component';
+import { HeroDetailComponent } from './hero/hero-detail.component';
+import { HeroService } from './hero/hero-service';
+import { CustomRouters } from './app.routes';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes)
+    FormsModule,    // <-- import the FormsModule before binding with [(ngModel)]
+    CustomRouters
   ],
   declarations: [
-    AppComponent,
-    HeroListComponent,
-    CrisisListComponent,
-    PageNotFoundComponent
+    AppComponent, DashboardComponent, HeroesComponent, HeroDetailComponent
   ],
+  providers: [HeroService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
